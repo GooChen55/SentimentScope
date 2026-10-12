@@ -1,0 +1,21 @@
+services:
+  mysql:
+    image: mysql:8.4.5
+    ports:
+      - "127.0.0.1:${DB_PORT:-13326}:3306"
+    env_file:
+      - ../config/database.env
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+    volumes:
+      - sentiment_mysql:/var/lib/mysql
+      - ./mysql/init/douyin_aweme.sql:/docker-entrypoint-initdb.d/01-douyin.sql:ro
+      - ./mysql/init/douyin_aweme_comment.sql:/docker-entrypoint-initdb.d/02-douyin-comments.sql:ro
+      - ./mysql/init/weibo_note.sql:/docker-entrypoint-initdb.d/03-weibo.sql:ro
+      - ./mysql/init/weibo_note_comment.sql:/docker-entrypoint-initdb.d/04-weibo-comments.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+volumes:
+  sentiment_mysql:

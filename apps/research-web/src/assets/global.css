@@ -1,0 +1,131 @@
+/* ================================================================
+   SentimentScope — Global Styles
+   Editorial intelligence dashboard. Dark, amber-accented, textured.
+   ================================================================ */
+
+:root {
+  --ink: #080a0d;
+  --ink-light: #11151b;
+  --ink-lighter: #1a1f28;
+  --paper: #e6e1d6;
+  --paper-dim: #8a8578;
+  --paper-muted: #5c5850;
+  --amber: #d4a034;
+  --amber-bright: #f2c94c;
+  --amber-ghost: rgba(212, 160, 52, 0.12);
+  --amber-glow: rgba(212, 160, 52, 0.25);
+  --red: #c44b3c;
+  --red-ghost: rgba(196, 75, 60, 0.15);
+  --teal: #4a9d8f;
+  --teal-ghost: rgba(74, 157, 143, 0.15);
+  --blue-steel: #5b7a9a;
+  --border: rgba(255, 255, 255, 0.05);
+  --border-strong: rgba(255, 255, 255, 0.1);
+  --radius: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --font-display: 'DM Serif Display', 'Noto Serif SC', serif;
+  --font-body: 'Noto Sans SC', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--ink);
+  color: var(--paper);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Grid texture */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none; z-index: 0;
+}
+
+/* Grain overlay */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none; z-index: 0;
+}
+
+#app { position: relative; z-index: 1; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+
+/* Selection */
+::selection { background: var(--amber-ghost); color: var(--amber-bright); }
+
+/* Typography */
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; line-height: 1.15; }
+code, pre { font-family: var(--font-mono); }
+
+a { color: var(--amber); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--amber-bright); }
+
+button {
+  font-family: var(--font-body); cursor: pointer; border: none; outline: none;
+  transition: all 0.2s var(--ease-out-expo);
+}
+button:disabled { opacity: 0.35; cursor: not-allowed; }
+
+input, textarea, select {
+  font-family: var(--font-body);
+  background: var(--ink-light);
+  border: 1px solid var(--border-strong);
+  color: var(--paper);
+  padding: 0.6em 1em;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+input:focus, textarea:focus {
+  border-color: var(--amber);
+  box-shadow: 0 0 0 3px var(--amber-ghost);
+}
+
+/* Staggered entrance */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 var(--amber-glow); }
+  50%      { box-shadow: 0 0 20px 4px var(--amber-glow); }
+}
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.stagger-1 { animation: fadeUp 0.5s var(--ease-out-expo) 0.05s both; }
+.stagger-2 { animation: fadeUp 0.5s var(--ease-out-expo) 0.12s both; }
+.stagger-3 { animation: fadeUp 0.5s var(--ease-out-expo) 0.19s both; }
+.stagger-4 { animation: fadeUp 0.5s var(--ease-out-expo) 0.26s both; }

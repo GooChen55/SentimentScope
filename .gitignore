@@ -1,0 +1,25 @@
+# Local configuration and user data
+/config/*.env
+!/config/*.env.example
+/config/crawler-database.json
+/var/
+**/.env
+**/.env.*
+!**/.env.example
+
+# Installed dependencies and generated outputs
+**/.venv/
+**/node_modules/
+**/dist/
+**/__pycache__/
+**/.pytest_cache/
+*.pyc
+*.log
+
+# Independently managed upstream repositories and local historical snapshots
+/vendor/mediacrawler/
+/references/evaluation/
+/archive/*/
+
+# Local planning notes
+/docs/reference/
