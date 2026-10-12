@@ -9,7 +9,7 @@
   --ink-lighter: #1a1f28;
   --paper: #e6e1d6;
   --paper-dim: #8a8578;
-  --paper-muted: #5c5850;
+  --paper-muted: #969183;
   --amber: #d4a034;
   --amber-bright: #f2c94c;
   --amber-ghost: rgba(212, 160, 52, 0.12);
@@ -129,3 +129,12 @@ input:focus, textarea:focus {
 .stagger-2 { animation: fadeUp 0.5s var(--ease-out-expo) 0.12s both; }
 .stagger-3 { animation: fadeUp 0.5s var(--ease-out-expo) 0.19s both; }
 .stagger-4 { animation: fadeUp 0.5s var(--ease-out-expo) 0.26s both; }
+
+button:focus-visible, a:focus-visible, summary:focus-visible, select:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 4px;
+}
+input, textarea, select { max-width: 100%; min-width: 0; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

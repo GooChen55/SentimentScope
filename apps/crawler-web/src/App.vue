@@ -10,6 +10,7 @@ const api = useApi()
 const activeTaskId = ref<string | null>(null)
 const statusText = ref('就绪')
 const statusDotClass = ref('gray')
+const taskTypeLabels: Record<string, string> = { deep_sentiment: '社交采集', broad_topic: '话题采集', web_page: '网页证据' }
 let pollTimer: ReturnType<typeof setInterval> | null = null
 
 const navItems = [
@@ -36,7 +37,7 @@ async function pollTasks() {
     if (active && (active.status === 'pending' || active.status === 'running' || active.status === 'stopping')) {
       activeTaskId.value = active.task_id
       if (active.status === 'running') {
-        statusText.value = `爬取中: ${active.type}`
+        statusText.value = `采集中：${taskTypeLabels[active.type] || active.type}`
         statusDotClass.value = 'blue'
       } else if (active.status === 'stopping') {
         statusText.value = '正在停止...'
@@ -58,10 +59,10 @@ async function pollTasks() {
 </script>
 
 <template>
-  <div class="flex h-screen overflow-hidden">
+  <div class="crawler-shell flex h-screen overflow-hidden">
     <!-- Sidebar -->
-    <aside class="w-52 flex-shrink-0 bg-terminal-panel border-r border-terminal-border flex flex-col">
-      <div class="px-5 py-5 border-b border-terminal-border">
+    <aside class="crawler-sidebar w-52 flex-shrink-0 bg-terminal-panel border-r border-terminal-border flex flex-col">
+      <div class="sidebar-brand px-5 py-5 border-b border-terminal-border">
         <h1 class="text-sm font-body font-semibold text-terminal-amber tracking-wide whitespace-nowrap">
           <img src="/sentimentscope.svg" alt="" class="w-6 h-6 inline-block mr-1" />SentimentScope
         </h1>
@@ -69,7 +70,7 @@ async function pollTasks() {
         <a href="http://127.0.0.1:3000" target="_blank" rel="noopener noreferrer" class="block text-xs text-terminal-muted hover:text-terminal-green mt-3">打开研究工作台 ↗</a>
       </div>
 
-      <nav class="flex-1 py-3">
+      <nav class="sidebar-nav flex-1 py-3" aria-label="采集控制台导航">
         <router-link
           v-for="item in navItems"
           :key="item.path"
@@ -84,7 +85,7 @@ async function pollTasks() {
         </router-link>
       </nav>
 
-      <div class="px-5 py-4 border-t border-terminal-border space-y-2">
+      <div class="sidebar-status px-5 py-4 border-t border-terminal-border space-y-2">
         <div class="flex items-center gap-2 text-xs">
           <span class="status-dot" :class="statusDotClass"></span>
           <span class="text-terminal-muted">{{ statusText }}</span>
@@ -96,8 +97,8 @@ async function pollTasks() {
     </aside>
 
     <!-- Main Content -->
-    <div class="flex-1 flex flex-col overflow-hidden">
-      <main class="flex-1 overflow-y-auto">
+    <div class="crawler-content flex-1 min-w-0 flex flex-col overflow-hidden">
+      <main class="crawler-main flex-1 overflow-y-auto">
         <router-view />
       </main>
 
@@ -108,8 +109,25 @@ async function pollTasks() {
         <span v-if="activeTaskId">活跃任务: {{ activeTaskId }}</span>
         <span v-else>无活跃任务</span>
         <span class="flex-1"></span>
-        <span>SentimentScope · 采集控制台</span>
+        <span class="footer-brand">SentimentScope · 采集控制台</span>
       </footer>
     </div>
   </div>
 </template>
+
+<style scoped>
+.crawler-main > :deep(div) { max-width: 1440px; margin: 0 auto; }
+@media (max-width: 760px) {
+  .crawler-shell { flex-direction: column; height: 100dvh; }
+  .crawler-sidebar { width: 100%; border-right: 0; }
+  .sidebar-brand { padding: .8rem 1rem; display: flex; justify-content: space-between; align-items: center; gap: .5rem; }
+  .sidebar-brand p { display: none; }
+  .sidebar-brand a { margin-top: 0; font-size: .65rem; }
+  .sidebar-nav { display: flex; overflow-x: auto; padding: 0; }
+  .sidebar-nav a { flex: 1 0 auto; justify-content: center; padding: .7rem .8rem; border-right: 0; font-size: .75rem; gap: .4rem; }
+  .sidebar-nav a.router-link-active { border-bottom: 2px solid #4a9d8f; }
+  .sidebar-status { display: none; }
+  .footer-brand { display: none; }
+  .crawler-main > :deep(div) { padding: 1rem; }
+}
+</style>

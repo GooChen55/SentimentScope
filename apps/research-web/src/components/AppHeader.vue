@@ -20,7 +20,7 @@ defineProps({
     </div>
 
     <div class="header-right">
-      <a href="http://127.0.0.1:5173" target="_blank" rel="noopener noreferrer" style="color:var(--paper-dim);margin-right:1rem;font-size:.8rem">打开采集控制台</a>
+      <a class="workspace-link" href="http://127.0.0.1:5173" target="_blank" rel="noopener noreferrer">采集控制台 <span aria-hidden="true">↗</span></a>
       <div class="connection-pulse" :class="{ live: connected }">
         <span class="pulse-ring"></span>
         <span class="pulse-label">{{ connected ? '事件已连接' : '连接断开' }}</span>
@@ -43,6 +43,10 @@ defineProps({
   align-items: center;
   gap: 1.2rem;
 }
+
+.header-right { display: flex; align-items: center; gap: 1rem; }
+.workspace-link { color: var(--paper-dim); font-size: .8rem; padding: .5rem .7rem; border: 1px solid var(--border-strong); border-radius: 8px; white-space: nowrap; }
+.workspace-link:hover { color: var(--amber); border-color: var(--amber); }
 
 .brand-mark {
   position: relative;

@@ -269,7 +269,7 @@ function roleStatus(role) {
 @media (max-width: 900px) {
   .role-grid {
     grid-template-columns: 1fr;
-    max-width: 500px;
+    min-width: 0;
     margin: 0 auto;
   }
 }

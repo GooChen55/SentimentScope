@@ -9,13 +9,14 @@ const emit = defineEmits(['update:activeTab'])
 </script>
 
 <template>
-  <nav class="app-nav stagger-2">
+  <nav class="app-nav stagger-2" aria-label="工作台导航">
     <div class="nav-inner">
       <button
         v-for="tab in tabs"
         :key="tab.key"
         class="nav-btn"
         :class="{ active: activeTab === tab.key }"
+        :aria-current="activeTab === tab.key ? 'page' : undefined"
         @click="emit('update:activeTab', tab.key)"
       >
         <span class="nav-label">{{ tab.label }}</span>
@@ -38,7 +39,7 @@ const emit = defineEmits(['update:activeTab'])
 }
 
 .nav-inner {
-  display: flex; gap: 0.25rem;
+  display: flex; gap: 0.25rem; max-width: 1360px; margin: 0 auto;
 }
 
 .nav-btn {
@@ -48,6 +49,8 @@ const emit = defineEmits(['update:activeTab'])
   background: none;
   color: var(--paper-muted);
   transition: color 0.2s;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 .nav-btn::after {
   content: '';
@@ -70,5 +73,12 @@ const emit = defineEmits(['update:activeTab'])
   font-family: var(--font-mono); font-size: 0.6rem; font-weight: 500;
   color: var(--ink); background: var(--amber);
   border-radius: 9px; padding: 0 6px;
+}
+
+@media (max-width: 700px) {
+  .app-nav { padding: 0 0.75rem; }
+  .nav-inner { overflow-x: auto; }
+  .nav-btn { padding: 0.85rem 1rem; flex: 1 0 auto; }
+  .nav-desc { display: none; }
 }
 </style>

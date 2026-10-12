@@ -10,6 +10,12 @@
 
 [架构说明](docs/architecture.md) · [使用指南](docs/guides/usage.md) · [安装与验证](docs/development.md) · [采集指南](docs/guides/crawler.md)
 
+## 界面预览
+
+![SentimentScope 研究工作台](docs/assets/research-workspace.png)
+
+研究工作台提供主题输入、Agent 进展、证据评测与历史筛选；采集控制台提供数据概览、任务创建和诊断。两套界面均支持窄屏布局。截图展示模拟模式与合成示例，不代表真实模型质量。
+
 ## 解决什么问题
 
 舆情分析往往需要在社交评论、新闻报道和模型生成结果之间反复切换，也容易遇到来源难核对、任务刷新后丢失、同主题报告混用等问题。
