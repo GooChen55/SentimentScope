@@ -1,0 +1,48 @@
+name: 问题反馈
+description: 报告可以复现的异常
+title: '[Bug] '
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: 请勿提交密钥、Cookie、登录二维码、数据库密码或含账号信息的原始日志。
+  - type: dropdown
+    id: component
+    attributes:
+      label: 影响模块
+      options:
+        - 研究工作台
+        - 采集控制台
+        - 研究 API
+        - 采集 API
+        - 启动与安装
+        - 文档
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 说明操作顺序、模拟或真实模式，以及使用的平台。
+      placeholder: '1. 打开… 2. 点击… 3. 出现…'
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: 预期结果与实际结果
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 运行环境
+      description: 操作系统、Python / Node.js 版本、提交号和相关平台；不要填写账号凭据。
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: 脱敏诊断
+      description: 可附错误码或经过脱敏的日志片段。
+      render: text

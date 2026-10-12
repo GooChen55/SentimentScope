@@ -1,5 +1,9 @@
 # SentimentScope · 舆情研判平台
 
+[![CI](https://github.com/GooChen55/SentimentScope/actions/workflows/ci.yml/badge.svg)](https://github.com/GooChen55/SentimentScope/actions/workflows/ci.yml)
+![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+![Vue 3](https://img.shields.io/badge/Vue-3-4FC08D?logo=vuedotjs&logoColor=white)
+
 面向热点事件与品牌舆情的全栈应用：从社交内容和公开网页获取证据，通过多 Agent 协作完成研判，并提供可追溯的讨论记录与 HTML / Markdown 报告。
 
 项目重点是让一次分析具备完整的任务生命周期：**采集 → 检索 → 双源分析 → 主持人研判 → 证据核对 → 报告导出**。当前采用 Python / FastAPI + Vue，支持 Windows 本机运行。
@@ -148,3 +152,7 @@ SentimentScope/
 社交采集使用 MediaCrawler，公开网页提取使用 Trafilatura，RAGAS 适配参考评测仓库实现。项目工程内容集中在研究编排、任务与事件持久化、采集适配、证据入库、报告和两个工作台之间的业务流程。
 
 来源、版本和许可见 [第三方说明](THIRD_PARTY_NOTICES.md)。MediaCrawler 采用非商业学习许可，使用时需遵循上游条款；所有第三方版权和许可证均保留。
+
+## 开发与反馈
+
+开发约定、检查命令和 PR 要求见 [贡献指南](CONTRIBUTING.md)。普通故障与功能建议可通过仓库 Issues 模板反馈，敏感信息处理见 [安全说明](SECURITY.md)。GitHub CI 自动执行后端测试、前端构建和仓库检查；真实采集与模型评测仍需本机单独验证。

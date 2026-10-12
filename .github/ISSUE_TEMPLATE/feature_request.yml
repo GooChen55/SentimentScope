@@ -1,0 +1,23 @@
+name: 功能建议
+description: 提出使用场景与改进目标
+title: '[Feature] '
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 使用场景与问题
+      description: 当前哪个操作或分析流程需要改进？
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 期望的功能
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 验收方式
+      description: 描述一个可以判断改进是否完成的例子。

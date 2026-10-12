@@ -23,6 +23,8 @@ npm --prefix apps/crawler-web ci
 
 ## 日常检查
 
+GitHub CI 对每次推送到 `main` 和 PR 执行隔离的后端测试、两套前端构建及仓库文件检查，不依赖本机数据库、登录账号或模型密钥。提交前也可运行 `.\apps\research-api\.venv\Scripts\python.exe tools/check_repository.py` 检查本地文档链接与文件边界。
+
 ```powershell
 .\scripts\check.ps1
 ```
